@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>✨ Doc Summarizer & QA Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📄 Document Summarizer & QA</h1>
+
+    <section>
+      <h2>Summarize Text</h2>
+      <textarea id="text" rows="8" placeholder="Paste your document..."></textarea>
+      <button onclick="summarize()">🔍 Summarize</button>
+      <div class="output"><strong>Summary:</strong><p id="summary"></p></div>
+    </section>
+
+    <section>
+      <h2>Ask a Question</h2>
+      <textarea id="question" rows="2" placeholder="Ask something about the text..."></textarea>
+      <button onclick="askQuestion()">❓ Ask</button>
+      <div class="output"><strong>Answer:</strong><p id="answer"></p></div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
