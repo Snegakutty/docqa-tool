@@ -11,6 +11,10 @@ async function summarize() {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({ text }),
     });
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(`Error ${res.status}: ${errorText}`);
+    }
     const data = await res.json();
     console.log("Backend response:", data);
     summaryEl.innerText = typeof data.summary === "string"
@@ -18,7 +22,7 @@ async function summarize() {
       : JSON.stringify(data.summary);
   } catch (e) {
     console.error(e);
-    summaryEl.innerText = "Failed to fetch summary.";
+    summaryEl.innerText = `Failed to fetch summary. ${e.message}`;
   }
 }
 
@@ -34,6 +38,10 @@ async function askQuestion() {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({ text, question }),
     });
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(`Error ${res.status}: ${errorText}`);
+    }
     const data = await res.json();
     console.log("Backend response:", data);
     answerEl.innerText = typeof data.answer === "string"
@@ -41,6 +49,6 @@ async function askQuestion() {
       : JSON.stringify(data.answer);
   } catch (e) {
     console.error(e);
-    answerEl.innerText = "Failed to fetch answer.";
+    answerEl.innerText = `Failed to fetch answer. ${e.message}`;
   }
 }
