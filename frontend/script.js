@@ -1,4 +1,4 @@
-const backendUrl = "http://127.0.0.1:5000";
+const backendUrl = "https://docqa-tool.onrender.com";
 
 async function summarize() {
   const text = document.getElementById("text").value;
