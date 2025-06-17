@@ -2,9 +2,10 @@ services:
   - type: web
     name: docqa-backend
     env: python
-    buildCommand: ""
+    buildCommand: "pip install -r requirements.txt"
     startCommand: "python app.py"
     envVars:
       - key: API_KEY
         value: hf_Your_Valid_HuggingFace_Token
     plan: free
+    rootDir: backend
