@@ -4,7 +4,7 @@ import requests
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "https://docqa-tool.vercel.app"}})
 
 API_KEY = os.getenv("API_KEY")
 
