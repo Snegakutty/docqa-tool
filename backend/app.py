@@ -5,8 +5,8 @@ import os
 
 app = Flask(__name__)
 
-# Allow CORS for Vercel frontend (or use origins="*" temporarily for testing)
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": "https://docqa-tool.vercel.app"}})
+# Allow all origins TEMPORARILY for testing. Restrict to Vercel after it works.
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 API_KEY = os.getenv("API_KEY")
 
@@ -21,11 +21,9 @@ def query_hf_api(payload, model):
 @app.route("/summarize", methods=["POST", "OPTIONS"])
 def summarize():
     if request.method == "OPTIONS":
-        return jsonify({}), 200
-
+        return '', 200
     text = request.json.get("text")
     output = query_hf_api({"inputs": text}, "facebook/bart-large-cnn")
-
     summary = (
         output[0].get("summary_text", "No summary.")
         if isinstance(output, list)
@@ -36,8 +34,7 @@ def summarize():
 @app.route("/question", methods=["POST", "OPTIONS"])
 def question():
     if request.method == "OPTIONS":
-        return jsonify({}), 200
-
+        return '', 200
     data = request.json
     output = query_hf_api(
         {"inputs": {"question": data.get("question"), "context": data.get("text")}},
